@@ -32,6 +32,36 @@ module.exports = {
   }),
 
   userSignup: asyncHandler(async (req, res) => {
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
+      res.status(400);
+      throw new Error("All fields are required..!!");
+    }
+  
+    const userAvailable = await userDetails.findOne({ email });
+    if (userAvailable) {
+      res.status(400);
+      throw new Error("User already Registered");
+    }
+  
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await userDetails.create({
+      username,
+      email,
+      password: hashedPassword,
+    });
+  
+    //after successful user creation i want to pass the details back to the user
+    if (user) {
+      res.status(201).json({ _id: user.id, email: user.email });
+    } else {
+      res.status(400);
+      throw new Error("Details Not Valid");
+    }
+  }),
+  
+
+ /* userSignup: asyncHandler(async (req, res) => {
     //const details = await userDetails.find();
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
@@ -62,7 +92,7 @@ module.exports = {
 
     res.status(200).json(user);
   }),
-
+*/
   userfInfo: asyncHandler(async (req, res) => {
     res.status(200).send("current user info..");
   }),
