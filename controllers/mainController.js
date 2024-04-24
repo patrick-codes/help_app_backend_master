@@ -63,10 +63,10 @@ module.exports = {
 
   newInfo: asyncHandler(async (req, res) => {
     res.status(200).json({ 
-      id: "345",
+      id: "24dhf8453432",
       title: "Boateng Patrick",
       department: "ITE",
-      level: "300",
+      level: "400",
       message: "Infomation Succesfully Fetched" });
   }),
 };
