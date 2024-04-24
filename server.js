@@ -14,7 +14,7 @@ app.use("/api/events", appRouter);
 app.use("/api/events/auth",userRouter);
 
 //const port = process.env.PORT || "5000";
-const port = "3000";
+const port = "5000";
 app.listen(
   port,
   console.log(`Help app server running on port ${port}`)
