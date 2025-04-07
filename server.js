@@ -4,6 +4,10 @@ const appRouter = require("./routes/applicationRoutes");
 const { dbConn } = require("./db_config/dbConnection");
 const dotenv = require("dotenv").config();
 
+
+const cors = require('cors');
+app.use(cors());
+
 //calling database connection
 dbConn();
 
