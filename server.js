@@ -7,11 +7,11 @@ const cors = require('cors');
 
 
 
+
 //calling database connection
 dbConn();
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 app.use("/api/events", appRouter);
