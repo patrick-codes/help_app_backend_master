@@ -8,7 +8,7 @@ module.exports = {
   userLogin: asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
-      res.status(400);
+      res.status(400).json({message:"All fields required ..!!"});      
       throw new Error("All fields required ..!!");
     }
     const user = await userDetails.findOne({ email });
@@ -26,7 +26,7 @@ module.exports = {
       );
       res.status(200).json({ accessToken });
     } else {
-      res.status(401);
+      res.status(401).json({message:"Email or Password not Valid"});
       throw new Error("Email or Password not Valid");
     }
   }),
@@ -34,13 +34,13 @@ module.exports = {
   userSignup: asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
-      res.status(400);
+      res.status(400).json({message:"All fields are required..!!"});
       throw new Error("All fields are required..!!");
     }
   
     const userAvailable = await userDetails.findOne({ email });
     if (userAvailable) {
-      res.status(400);
+      res.status(401).json({message:"User already Registered"});
       throw new Error("User already Registered");
     }
   
@@ -55,7 +55,7 @@ module.exports = {
     if (user) {
       res.status(201).json({ _id: user.id, email: user.email });
     } else {
-      res.status(400);
+      res.status(400).json({message:"Details Not Valid"});
       throw new Error("Details Not Valid");
     }
   }),
