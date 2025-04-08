@@ -24,7 +24,7 @@ module.exports = {
         process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: "60m" }
       );
-      res.status(200).json({ accessToken });
+      res.status(200).json({message:"Login Sucessful", token: accessToken,});
     } else {
       res.status(401).json({message:"Email or Password not Valid"});
       throw new Error("Email or Password not Valid");
